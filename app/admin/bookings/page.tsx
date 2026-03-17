@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api";
 import { Loader2, CheckCircle, XCircle } from "lucide-react";
 import { toast, Toaster } from "react-hot-toast";
 
-export default function BookingsManagement() {
+function BookingsContent() {
     const { data: bookings, isLoading, refetch } = useQuery({
         queryKey: ["admin-bookings"],
         queryFn: async () => {
@@ -114,5 +115,17 @@ export default function BookingsManagement() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function BookingsManagement() {
+    return (
+        <Suspense fallback={
+            <div className="flex justify-center py-20">
+                <Loader2 className="w-8 h-8 text-accent animate-spin" />
+            </div>
+        }>
+            <BookingsContent />
+        </Suspense>
     );
 }

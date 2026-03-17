@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { Suspense, useState, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import BubbleLoader from '@/components/ui/BubbleLoader';
 
-export default function TopProgressBar() {
+function TopProgressBarContent() {
     const [showLoader, setShowLoader] = useState(false);
     const [showProgress, setShowProgress] = useState(false);
 
@@ -14,22 +14,21 @@ export default function TopProgressBar() {
     const isFirstRender = useRef(true);
 
     useEffect(() => {
-        // Prevent showing on initial load
         if (isFirstRender.current) {
             isFirstRender.current = false;
             return;
         }
 
-        // Trigger on navigation
+        
         setShowLoader(true);
         setShowProgress(false);
 
-        // 1. Show Progress Bar after 1 second of Bubble Loader
+     
         const progressTimer = setTimeout(() => {
             setShowProgress(true);
         }, 1000);
 
-        // 2. Hide everything after 4 seconds total
+      
         const resetTimer = setTimeout(() => {
             setShowLoader(false);
             setShowProgress(false);
@@ -65,5 +64,13 @@ export default function TopProgressBar() {
                 </motion.div>
             )}
         </AnimatePresence>
+    );
+}
+
+export default function TopProgressBar() {
+    return (
+        <Suspense fallback={null}>
+            <TopProgressBarContent />
+        </Suspense>
     );
 }
