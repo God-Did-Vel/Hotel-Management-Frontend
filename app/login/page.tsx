@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import { apiClient } from "@/lib/api";
 import { toast, Toaster } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 
@@ -18,7 +18,7 @@ export default function ClientLogin() {
         setIsLoading(true);
 
         try {
-            const { data } = await axios.post("http://localhost:5000/api/users/login", {
+            const { data } = await apiClient.post("/api/users/login", {
                 email,
                 password
             });

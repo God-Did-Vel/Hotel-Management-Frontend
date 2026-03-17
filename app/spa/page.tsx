@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flower2, Wind, Droplet, Sparkles, Loader2, CheckCircle2 } from "lucide-react";
-import axios from "axios";
+import { apiClient } from "@/lib/api";
 
 export default function SpaPage() {
     const [isBooking, setIsBooking] = useState(false);
@@ -22,7 +22,7 @@ export default function SpaPage() {
 
         try {
             // Point to our newly created backend Spa API
-            const { data } = await axios.post("http://localhost:5000/api/spa/book", formData);
+            const { data } = await apiClient.post("/api/spa/book", formData);
 
             setStatus({
                 type: 'success',

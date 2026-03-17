@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut, Calendar, Clock, CreditCard, User, Loader2 } from "lucide-react";
-import axios from "axios";
+import { apiClient } from "@/lib/api";
 import { toast, Toaster } from "react-hot-toast";
 import BubbleLoader from "@/components/ui/BubbleLoader";
 
@@ -54,15 +54,15 @@ export default function ClientDashboard() {
                 const userConfig = {
                     headers: { Authorization: `Bearer ${token}` }
                 };
-                const userRes = await axios.get("http://localhost:5000/api/users/profile", userConfig);
+                const userRes = await apiClient.get("/api/users/profile", userConfig);
                 setUser(userRes.data);
 
                 // Fetch User Bookings
-                const bookingsRes = await axios.get("http://localhost:5000/api/bookings/mybookings", userConfig);
+                const bookingsRes = await apiClient.get("/api/bookings/mybookings", userConfig);
                 setBookings(bookingsRes.data);
 
                 // Fetch Active Payment Methods
-                const methodsRes = await axios.get("http://localhost:5000/api/payment-methods");
+                const methodsRes = await apiClient.get("/api/payment-methods");
                 setPaymentMethods(methodsRes.data);
 
             } catch (error) {

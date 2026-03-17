@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Calendar, Users, MapPin, CheckCircle, Loader2 } from "lucide-react";
 import ExtendedLuxuryText from "@/components/sections/ExtendedLuxuryText";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
+import { apiClient } from "@/lib/api";
 
 export default function BookPage() {
     const [success, setSuccess] = useState(false);
@@ -26,7 +26,7 @@ export default function BookPage() {
         // Fetch rooms for the dropdown
         const fetchRooms = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/rooms");
+                const res = await apiClient.get("/api/rooms");
                 // Only show available rooms ideally, but we fetch all to let them see
                 setRooms(res.data);
                 if (res.data.length > 0) {
@@ -72,7 +72,7 @@ export default function BookPage() {
                 headers: token ? { Authorization: `Bearer ${token}` } : {}
             };
 
-            await axios.post("http://localhost:5000/api/bookings", {
+            await apiClient.post("/api/bookings", {
                 guest_name: `${firstName} ${lastName}`,
                 guest_email: email,
                 guest_phone: phone,

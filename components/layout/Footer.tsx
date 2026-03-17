@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, Loader2 } from "lucide-react";
-import axios from "axios";
+import { apiClient } from "@/lib/api";
 
 export default function Footer() {
     const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ export default function Footer() {
         setStatus({ type: 'loading' });
 
         try {
-            await axios.post("http://localhost:5000/api/newsletter/subscribe", { email });
+            await apiClient.post("/api/newsletter/subscribe", { email });
             setStatus({ type: 'success', message: "Subscribed successfully!" });
             setEmail("");
         } catch (error: any) {
