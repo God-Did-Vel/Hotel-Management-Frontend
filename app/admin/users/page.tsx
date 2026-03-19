@@ -9,7 +9,7 @@ export default function UsersManagement() {
         queryKey: ["admin-users"],
         queryFn: async () => {
             const token = localStorage.getItem("adminToken");
-            const { data } = await apiClient.get("/users", {
+            const { data } = await apiClient.get("/api/users", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return data;

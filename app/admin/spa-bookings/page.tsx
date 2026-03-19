@@ -9,7 +9,7 @@ export default function SpaBookingsManagement() {
         queryKey: ["admin-spa-bookings"],
         queryFn: async () => {
             const token = localStorage.getItem("adminToken");
-            const { data } = await apiClient.get("/spa", {
+            const { data } = await apiClient.get("/api/spa", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return data;

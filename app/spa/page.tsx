@@ -102,7 +102,7 @@ export default function SpaPage() {
                         className="relative h-[600px] w-full rounded-2xl overflow-hidden group"
                     >
                         <img
-                            src="https://res.cloudinary.com/duweg8kpv/image/upload/v1772119962/d6_q8zjkp.jpg"
+                            src="https://res.cloudinary.com/duweg8kpv/image/upload/v1773844187/spa_b8moxk.jpg"
                             alt="Spa and Wellness"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                         />

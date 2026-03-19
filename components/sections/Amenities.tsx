@@ -8,16 +8,19 @@ const AMENITIES = [
         title: "The Spa Sanctuary",
         description: "Rejuvenate your body and mind in our award-winning spa featuring holistic treatments and thermal baths.",
         image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1600&auto=format&fit=crop",
+        link: "/spa",
     },
     {
         title: "Gastronomic Excellence",
         description: "Indulge in culinary masterpieces at our Michelin-starred restaurant, crafted by world-renowned chefs.",
         image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1772915872/bb3feec381e3e248e2bd6557bab0e8f7_l5sequ.jpg",
+        link: "/restaurant",
     },
     {
         title: "Infinity Pool",
         description: "Swim to the edge of the horizon in our temperature-controlled infinity pool overlooking the city skyline.",
         image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600&auto=format&fit=crop",
+        link: "/gallery",
     }
 ];
 
@@ -103,7 +106,7 @@ export default function Amenities() {
                                     <p className="text-gray-400 font-light leading-relaxed text-lg">
                                         {amenity.description}
                                     </p>
-                                    <Link href="/spa" className="mt-10 uppercase tracking-[0.2em] text-sm text-accent hover:text-white transition-colors flex items-center group">
+                                    <Link href={amenity.link} className="mt-10 uppercase tracking-[0.2em] text-sm text-accent hover:text-white transition-colors flex items-center group">
                                         Discover More
                                         <span className="ml-4 w-12 h-[1px] bg-accent group-hover:w-16 group-hover:bg-white transition-all duration-300" />
                                     </Link>

@@ -35,21 +35,21 @@ export default function Navbar() {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex space-x-3 items-center">
-                    <Link href="/" className="relative text-xs font-light uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
+                    <Link href="/" className="relative text-xs font-semibold uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
                         Home
                     </Link>
-                    <Link href="/rooms" className="relative text-xs font-light uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
+                    <Link href="/rooms" className="relative text-xs font-semibold uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
                         Rooms & Suites
                     </Link>
-                    <Link href="/gallery" className="relative text-xs font-light uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
+                    <Link href="/gallery" className="relative text-xs font-semibold uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
                         Gallery
                     </Link>
-                    <Link href="/login" className="relative text-xs font-light uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
+                    <Link href="/login" className="relative text-xs font-semibold uppercase tracking-[0.25em] text-white transition-colors hover:text-[#c8a97e] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-[#c8a97e] after:transition-all hover:after:w-full">
                         SignIn
                     </Link>
                     <Link
                         href="/book"
-                        className="border border-accent text-accent px-6 py-2 uppercase tracking-wider text-xs hover:bg-accent hover:text-background transition-colors"
+                        className="border border-accent text-accent font-semibold px-6 py-2 uppercase tracking-wider text-xs hover:bg-accent hover:text-background transition-colors"
                     >
                         Book Now
                     </Link>

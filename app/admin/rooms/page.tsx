@@ -9,6 +9,7 @@ import { toast, Toaster } from "react-hot-toast";
 export default function RoomsManagement() {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     // Form State
     const [formData, setFormData] = useState({
@@ -19,12 +20,13 @@ export default function RoomsManagement() {
         max_guests: 1,
         room_size: "",
         bed_type: "",
+        images: [] as string[],
     });
 
     const { data: rooms, isLoading, refetch } = useQuery({
         queryKey: ["admin-rooms"],
         queryFn: async () => {
-            const { data } = await apiClient.get("/rooms");
+            const { data } = await apiClient.get("/api/rooms");
             return data;
         }
     });
@@ -33,7 +35,7 @@ export default function RoomsManagement() {
         if (confirm("Are you sure you want to delete this room?")) {
             try {
                 const token = localStorage.getItem("adminToken");
-                await apiClient.delete(`/rooms/${id}`, {
+                await apiClient.delete(`/api/rooms/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 toast.success("Room deleted successfully");
@@ -49,20 +51,50 @@ export default function RoomsManagement() {
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.post("/rooms", formData, {
+            await apiClient.post("/api/rooms", formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success("Room created successfully!");
             setIsAddModalOpen(false);
             setFormData({
                 name: "", slug: "", description: "", price_per_night: 0,
-                max_guests: 1, room_size: "", bed_type: ""
+                max_guests: 1, room_size: "", bed_type: "", images: []
             });
             refetch();
         } catch (error: any) {
             toast.error(error.response?.data?.message || "Failed to create room");
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const uploadFileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const formDataFile = new FormData();
+        formDataFile.append("image", file);
+        setUploadingImage(true);
+
+        try {
+            const token = localStorage.getItem("adminToken");
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            // Assuming axios/apiClient works identically for multipart
+            const { data } = await apiClient.post("/api/upload", formDataFile, config);
+            
+            setFormData({ ...formData, images: [...formData.images, data] });
+            toast.success("Image uploaded!");
+        } catch (error: any) {
+            console.error(error);
+            toast.error("Image upload failed");
+        } finally {
+            setUploadingImage(false);
         }
     };
 
@@ -182,6 +214,19 @@ export default function RoomsManagement() {
                                     value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })}
                                     className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent resize-none"
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Room Image</label>
+                                <input
+                                    type="file"
+                                    onChange={uploadFileHandler}
+                                    className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-black hover:file:bg-white"
+                                />
+                                {uploadingImage && <Loader2 className="w-4 h-4 text-accent animate-spin mt-2" />}
+                                {formData.images.length > 0 && (
+                                    <div className="mt-2 text-xs text-green-500">{formData.images.length} Image(s) Attached</div>
+                                )}
                             </div>
 
                             <div className="grid grid-cols-2 gap-6">

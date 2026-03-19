@@ -16,7 +16,7 @@ export default function AdminPaymentMethods() {
         queryKey: ["admin-payment-methods"],
         queryFn: async () => {
             const token = localStorage.getItem("adminToken");
-            const { data } = await apiClient.get("/payment-methods/admin", {
+            const { data } = await apiClient.get("/api/payment-methods/admin", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return data;
@@ -28,7 +28,7 @@ export default function AdminPaymentMethods() {
         setIsSaving(true);
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.post("/payment-methods", {
+            await apiClient.post("/api/payment-methods", {
                 provider: newProvider,
                 details: newDetails,
                 isActive: true
@@ -50,7 +50,7 @@ export default function AdminPaymentMethods() {
     const handleToggleActive = async (id: string, currentStatus: boolean) => {
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.put(`/payment-methods/${id}`, { isActive: !currentStatus }, {
+            await apiClient.put(`/api/payment-methods/${id}`, { isActive: !currentStatus }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success(`Payment method ${!currentStatus ? 'activated' : 'deactivated'}`);
@@ -64,7 +64,7 @@ export default function AdminPaymentMethods() {
         if (!confirm("Are you sure you want to delete this payment method?")) return;
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.delete(`/payment-methods/${id}`, {
+            await apiClient.delete(`/api/payment-methods/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success("Payment method deleted");

@@ -14,17 +14,15 @@ const config: Config = {
         primary: "#141414", 
         accent: "#d4af37", 
       },
-      fontFamily: {
+       fontFamily: {
         sans: ['"Lato"', 'sans-serif'],
         serif: ['"Lato"', 'serif'],
         mono: ['"Lato"', 'monospace'],
         playfair: ['"Lato"', 'serif'],
       },
-
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-out forwards',

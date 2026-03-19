@@ -54,12 +54,12 @@ export default function ClientLogin() {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                        <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Email or Phone</label>
                         <input
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="your.email@example.com"
+                            placeholder="your.email@example.com or Phone"
                             required
                             className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"
                         />

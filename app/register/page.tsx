@@ -10,6 +10,7 @@ import { Loader2 } from "lucide-react";
 export default function ClientRegister() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
@@ -20,7 +21,7 @@ export default function ClientRegister() {
 
         try {
             if (!name.trim() || !email.trim() || !password.trim()) {
-                toast.error("Please fill in all fields");
+                toast.error("Please fill in all required fields");
                 setIsLoading(false);
                 return;
             }
@@ -28,6 +29,7 @@ export default function ClientRegister() {
             const { data } = await apiClient.post("/api/users", {
                 name: name.trim(),
                 email: email.trim(),
+                phoneNumber: phoneNumber.trim(),
                 password: password.trim()
             });
 
@@ -80,6 +82,17 @@ export default function ClientRegister() {
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="your.email@example.com"
                             required
+                            className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Phone Number</label>
+                        <input
+                            type="tel"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            placeholder="+123456789 (Optional)"
                             className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"
                         />
                     </div>

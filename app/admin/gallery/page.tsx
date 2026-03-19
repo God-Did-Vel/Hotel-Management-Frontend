@@ -19,7 +19,7 @@ export default function GalleryManagement() {
     const { data: images, isLoading, refetch } = useQuery({
         queryKey: ["admin-gallery"],
         queryFn: async () => {
-            const { data } = await apiClient.get("/gallery");
+            const { data } = await apiClient.get("/api/gallery");
             return data;
         }
     });
@@ -28,7 +28,7 @@ export default function GalleryManagement() {
         if (confirm("Are you sure you want to delete this image?")) {
             try {
                 const token = localStorage.getItem("adminToken");
-                await apiClient.delete(`/gallery/${id}`, {
+                await apiClient.delete(`/api/gallery/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 toast.success("Image deleted successfully");
@@ -44,7 +44,7 @@ export default function GalleryManagement() {
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.post("/gallery", formData, {
+            await apiClient.post("/api/gallery", formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success("Image added to gallery!");

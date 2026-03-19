@@ -6,7 +6,6 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import TopProgressBar from "@/components/ui/TopProgressBar";
 import SplashScreen from "@/components/ui/SplashScreen";
 import ClientLayoutWrapper from "@/components/layout/ClientLayoutWrapper";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "N&B Italian Hotel | Premium Luxury Hotel",
@@ -25,10 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script
-          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&libraries=places,maps`}
-          strategy="beforeInteractive"
-        />
       </head>
       <body className={`font-sans bg-background text-foreground antialiased`}>
         <CustomCursor />

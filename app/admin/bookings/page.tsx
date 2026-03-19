@@ -11,7 +11,7 @@ function BookingsContent() {
         queryKey: ["admin-bookings"],
         queryFn: async () => {
             const token = localStorage.getItem("adminToken");
-            const { data } = await apiClient.get("/bookings", {
+            const { data } = await apiClient.get("/api/bookings", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return data;
@@ -21,7 +21,7 @@ function BookingsContent() {
     const handleStatusChange = async (id: string, status: string) => {
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.patch(`/bookings/${id}/status`, { booking_status: status }, {
+            await apiClient.patch(`/api/bookings/${id}/status`, { booking_status: status }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success(`Booking ${status} successfully.`);

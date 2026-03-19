@@ -9,7 +9,7 @@ export default function NewsletterManagement() {
         queryKey: ["admin-newsletter"],
         queryFn: async () => {
             const token = localStorage.getItem("adminToken");
-            const { data } = await apiClient.get("/newsletter", {
+            const { data } = await apiClient.get("/api/newsletter", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return data;

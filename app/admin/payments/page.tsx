@@ -10,7 +10,7 @@ export default function PaymentsManagement() {
         queryKey: ["admin-payments"],
         queryFn: async () => {
             const token = localStorage.getItem("adminToken");
-            const { data } = await apiClient.get("/payments", {
+            const { data } = await apiClient.get("/api/payments", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return data;
@@ -20,7 +20,7 @@ export default function PaymentsManagement() {
     const handleStatusChange = async (id: string, newStatus: string) => {
         try {
             const token = localStorage.getItem("adminToken");
-            await apiClient.put(`/payments/${id}`, { status: newStatus }, {
+            await apiClient.put(`/api/payments/${id}`, { status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success(`Payment marked as ${newStatus}`);

@@ -7,36 +7,58 @@ import { useRef, useState } from "react";
 export default function VideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
       } else {
-        videoRef.current.play();
+        videoRef.current.play().catch((err) => {
+          console.error("Play error:", err);
+          setIsPlaying(false);
+        });
       }
       setIsPlaying(!isPlaying);
     }
   };
 
-  return (
-    <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
+  const handleVideoError = () => {
+    console.error("Video failed to load");
+    setVideoError(true);
+    setIsPlaying(false);
+  };
 
-      <video
-        ref={videoRef}
-        src="https://res.cloudinary.com/duweg8kpv/video/upload/q_auto,f_auto/v1771522393/White_and_Brown_Food_Facebook_Video_Promo_1_qswwkv.mp4"
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
-      ></video>
+  return (
+    <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden bg-black">
+      {/* Video Background */}
+      {!videoError && (
+        <video
+          ref={videoRef}
+          onError={handleVideoError}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          loop
+          playsInline
+          preload="metadata"
+          muted
+          className="absolute inset-0 w-full h-full object-cover"
+          crossOrigin="anonymous"
+        >
+          <source
+            src="https://res.cloudinary.com/duweg8kpv/video/upload/q_auto,f_auto/v1771522393/White_and_Brown_Food_Facebook_Video_Promo_1_qswwkv.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      )}
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-6">
-
+        {/* Play Button */}
         <motion.div
           onClick={togglePlay}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -52,6 +74,7 @@ export default function VideoSection() {
           )}
         </motion.div>
 
+        {/* Discover Label */}
         <motion.h4
           className="text-accent uppercase tracking-[0.3em] text-sm mb-4 font-light"
           initial={{ opacity: 0, y: 20 }}
@@ -62,6 +85,7 @@ export default function VideoSection() {
           Discover
         </motion.h4>
 
+        {/* Main Title */}
         <motion.h2
           className="text-4xl md:text-6xl font-serif text-white tracking-wide"
           initial={{ opacity: 0, y: 20 }}
@@ -72,8 +96,18 @@ export default function VideoSection() {
           The Art of Luxury
         </motion.h2>
 
+        {/* Error Message (if video fails) */}
+        {videoError && (
+          <motion.p
+            className="text-gray-400 mt-4 text-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Video unavailable. Displaying static background.
+          </motion.p>
+        )}
       </div>
-
     </section>
   );
 }
