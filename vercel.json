@@ -1,4 +1,7 @@
 {
-  "buildCommand": "npm ci --legacy-peer-deps && npm run build",
-  "installCommand": "npm ci --legacy-peer-deps"
-}
+  "buildCommand": "npm run build",
+  "devCommand": "next dev",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": "nextjs",
+  "nodeVersion": "22.x"
+} 
