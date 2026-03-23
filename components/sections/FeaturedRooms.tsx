@@ -9,24 +9,24 @@ const FEATURED_ROOMS = [
         id: 1,
         name: "Royal Suite",
         size: "120 sqm",
-        price: 850,
-        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1600&auto=format&fit=crop",
+        price: 80,
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272413/N11_amqfvq.jpg",
         features: ["Ocean View", "King Bed", "Private Balcony", "Butler Service"]
     },
     {
         id: 2,
         name: "Deluxe Ocean View",
         size: "85 sqm",
-        price: 550,
-        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1772119962/d4_s0joyk.jpg",
+        price: 50,
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272414/N9_nttuhn.jpg",
         features: ["Ocean View", "Queen Bed", "Marble Bathroom"]
     },
     {
         id: 3,
         name: "Premium Executive",
         size: "65 sqm",
-        price: 400,
-        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1772120021/d6_pebx9x.jpg",
+        price: 40,
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272414/N7_rg7g2i.jpg",
         features: ["City View", "King Bed", "Work Desk", "Lounge Access"]
     }
 ];
@@ -73,7 +73,7 @@ export default function FeaturedRooms() {
                                 />
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
                                 <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm text-white px-4 py-2 text-sm font-serif">
-                                    ${room.price} <span className="text-xs text-gray-400 font-sans">/ Night</span>
+                                    ₦{room.price} <span className="text-xs text-gray-400 font-sans">/ Night</span>
                                 </div>
                             </div>
 

@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const GALLERY_IMAGES = [
-    "https://res.cloudinary.com/duweg8kpv/image/upload/v1772120021/d6_pebx9x.jpg", // Exterior
-    "https://res.cloudinary.com/duweg8kpv/image/upload/v1772119962/d4_s0joyk.jpg", // Room
-    "https://res.cloudinary.com/duweg8kpv/image/upload/v1772119962/d2_lgwtmv.jpg", // Lounge
-    "https://res.cloudinary.com/duweg8kpv/image/upload/v1772119962/d5_okuxgh.jpg", // Food
+    "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg", // Exterior
+    "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272414/N8_e2gfi5.jpg", // Room
+    "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272415/N14_kasepl.jpg", // Lounge
+    "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272415/N3_tcbn2l.jpg", // Food
     "https://res.cloudinary.com/duweg8kpv/image/upload/v1772119961/d3_xsxaea.jpg", // Lobby
     "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop", // Spa
 ];

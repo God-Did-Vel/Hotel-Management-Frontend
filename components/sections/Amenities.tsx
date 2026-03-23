@@ -19,7 +19,7 @@ const AMENITIES = [
     {
         title: "Infinity Pool",
         description: "Swim to the edge of the horizon in our temperature-controlled infinity pool overlooking the city skyline.",
-        image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272415/N14_kasepl.jpg",
         link: "/gallery",
     }
 ];

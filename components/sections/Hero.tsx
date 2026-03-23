@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 const SLIDES = [
     "https://res.cloudinary.com/duweg8kpv/image/upload/v1772119962/d5_okuxgh.jpg",
     "https://res.cloudinary.com/duweg8kpv/image/upload/v1772988986/360_F_692511356_6jleOpKpvIMrGRtXo7TZk70aD8ePbZvQ_q7ahz9.jpg",
-    "https://res.cloudinary.com/duweg8kpv/image/upload/v1771601790/N_B4_tjbkfy.jpg"
+    "https://res.cloudinary.com/duweg8kpv/image/upload/v1771601790/N_B4_tjbkfy.jpg",
+    "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272415/N2_rjyxjd.jpg"
 ];
 
 export default function Hero() {

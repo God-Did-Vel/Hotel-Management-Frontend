@@ -6,34 +6,34 @@ const rooms = [
     {
         _id: "69b2e1484f4211ddc6d25796",
         name: "Deluxe Room",
-        price_per_night: 250,
+        price_per_night: 50,
         description: "A beautiful modern room with luxurious amenities, perfect for couples seeking a romantic getaway.",
-        image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2070&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272414/N9_nttuhn.jpg",
         bed_type: "1 King",
         amenities: ["Free Wifi"]
     },
     {
         _id: "69b2e1484f4211ddc6d25797",
         name: "Executive Suite",
-        price_per_night: 450,
+        price_per_night: 40,
         description: "Spacious living area and panoramic city views for the discerning traveler looking for extra comfort.",
-        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1974&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272413/N11_amqfvq.jpg",
         bed_type: "1 King, 1 Sofa",
         amenities: ["Minibar"]
     },
     {
         _id: "69b2e1484f4211ddc6d25798",
         name: "Presidential Suite",
-        price_per_night: 950,
+        price_per_night: 90,
         description: "The pinnacle of luxury. Expansive space, private balcony, and unparalleled 5-star service.",
-        image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2070&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
         bed_type: "2 King",
         amenities: ["Premium Bar"]
     },
     {
         _id: "69b2e1484f4211ddc6d25799",
         name: "Family Suite",
-        price_per_night: 350,
+        price_per_night: 50,
         description: "Perfect for family vacations, featuring interconnected rooms and special amenities for children.",
         image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1772120021/d6_pebx9x.jpg",
         bed_type: "2 Double",
@@ -42,18 +42,18 @@ const rooms = [
     {
         _id: "69b2e1484f4211ddc6d2579a",
         name: "Superior Room",
-        price_per_night: 180,
+        price_per_night: 80,
         description: "A cozy and elegant room designed for short stays with all essential luxury amenities.",
-        image: "https://images.unsplash.com/photo-1549294413-26f195200c16?q=80&w=2070&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272413/N11_amqfvq.jpg",
         bed_type: "1 Queen",
         amenities: ["Coffee Maker"]
     },
     {
         _id: "69b2e1484f4211ddc6d2579b",
         name: "Honeymoon Suite",
-        price_per_night: 600,
+        price_per_night: 60,
         description: "Romantic escape featuring a heart-shaped jacuzzi, complimentary champagne, and rose petal decorations.",
-        image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=2070&auto=format&fit=crop",
+        image: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272414/N9_nttuhn.jpg",
         bed_type: "1 King",
         amenities: ["Champagne", "Heart-shaped jacuzzi"]
     }
@@ -78,7 +78,7 @@ export default function RoomsPage() {
                         <div className="p-8">
                             <div className="flex justify-between items-center mb-4">
                                 <h2 className="text-2xl text-white font-serif">{room.name}</h2>
-                                <p className="text-accent font-serif text-xl">${room.price_per_night}<span className="text-sm text-gray-500">/night</span></p>
+                                <p className="text-accent font-serif text-xl">₦{room.price_per_night}<span className="text-sm text-gray-500">/night</span></p>
                             </div>
                             <p className="text-gray-400 mb-6 line-clamp-2">{room.description}</p>
                             <div className="flex space-x-4 mb-8 text-gray-400">
