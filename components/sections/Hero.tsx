@@ -47,7 +47,7 @@ export default function Hero() {
             {/* Content */}
             <div className="relative z-10 text-center px-6">
                 <motion.span
-                    className="block text-accent uppercase tracking-[0.3em] text-lg mb-4 font-light"
+                    className="block text-accent uppercase tracking-[0.3em] text-lg mb-[2px] font-light"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
@@ -56,7 +56,7 @@ export default function Hero() {
                 </motion.span>
 
                 <motion.h1
-                    className="text-3xl md:text-5xl lg:text-8xl text-white mb-8 tracking-wider"
+                    className="text-3xl md:text-5xl lg:text-8xl text-white mb-[-5px] tracking-wider"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.7 }}
@@ -65,7 +65,7 @@ export default function Hero() {
                 </motion.h1>
 
                 <motion.p
-                    className="text-gray-300 font-light max-w-2xl mx-auto mb-10 text-lg md:text-xl"
+                    className="text-gray-300 font-light max-w-2xl mx-auto mb-5 text-lg md:text-xl"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 1 }}
