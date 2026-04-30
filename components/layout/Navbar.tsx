@@ -7,7 +7,7 @@ import { Menu, X, Phone } from "lucide-react";
 
 
 const LOGO_URL =
-  "https://res.cloudinary.com/duweg8kpv/image/upload/v1772902061/logo_geg3c4.png";
+  "https://res.cloudinary.com/duweg8kpv/image/upload/bb2-removebg-preview_rgczdz.png";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
