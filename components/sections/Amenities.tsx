@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/api";
 
 const AMENITIES = [
     {
@@ -81,10 +83,12 @@ export default function Amenities() {
                                         viewport={{ once: true, margin: "-100px" }}
                                         transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1], delay: 0.2 }}
                                     />
-                                    <img
-                                        src={amenity.image}
+                                    <Image
+                                        src={getImageUrl(amenity.image)}
                                         alt={amenity.title}
-                                        className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                                        fill
+                                        className="object-cover transition-transform duration-1000 hover:scale-105"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
                                     />
                                 </motion.div>
 

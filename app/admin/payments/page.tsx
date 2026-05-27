@@ -68,7 +68,7 @@ export default function PaymentsManagement() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-white">
-                                        ${payment.amount?.toLocaleString()}
+                                        ₦{payment.amount?.toLocaleString()}
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className="capitalize text-gray-400">{payment.payment_method?.replace('_', ' ')}</span>

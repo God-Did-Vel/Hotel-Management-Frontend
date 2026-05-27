@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flower2, Wind, Droplet, Sparkles, Loader2, CheckCircle2 } from "lucide-react";
-import { apiClient } from "@/lib/api";
+import { apiClient, getImageUrl } from "@/lib/api";
+import Image from "next/image";
 
 export default function SpaPage() {
     const [isBooking, setIsBooking] = useState(false);
@@ -101,10 +102,12 @@ export default function SpaPage() {
                         transition={{ duration: 0.8 }}
                         className="relative h-[600px] w-full rounded-2xl overflow-hidden group"
                     >
-                        <img
-                            src="https://res.cloudinary.com/duweg8kpv/image/upload/v1773844187/spa_b8moxk.jpg"
+                        <Image
+                            src={getImageUrl("https://res.cloudinary.com/duweg8kpv/image/upload/v1773844187/spa_b8moxk.jpg")}
                             alt="Spa and Wellness"
-                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            fill
+                            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, 600px"
                         />
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-700" />
                     </motion.div>

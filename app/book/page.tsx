@@ -328,7 +328,7 @@ export default function BookPage() {
                                         <option value="">Select a room...</option>
                                         {rooms.map((room) => (
                                             <option key={room._id} value={room._id}>
-                                                {room.name} - ${room.price_per_night}/night
+                                                {room.name} - ₦{room.price_per_night.toLocaleString()}/night
                                             </option>
                                         ))}
                                     </select>
@@ -394,7 +394,7 @@ export default function BookPage() {
                             <div className="bg-[#1a1a1a] p-6 rounded-lg border border-white/10 mt-6 flex justify-between items-center">
                                 <span className="text-gray-400">Total Estimated Cost:</span>
                                 <span className="text-2xl font-serif text-accent flex items-center">
-                                    ${calculateTotal(roomId, checkIn, checkOut).toLocaleString()}
+                                    ₦{calculateTotal(roomId, checkIn, checkOut).toLocaleString()}
                                 </span>
                             </div>
                         )}

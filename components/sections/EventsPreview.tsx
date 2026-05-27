@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/api";
 
 export default function EventsPreview() {
     return (
@@ -32,7 +34,13 @@ export default function EventsPreview() {
 
                     <div className="text-center group">
                         <div className="overflow-hidden mb-6 aspect-[4/5] relative">
-                            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Summit" />
+                            <Image
+                                src={getImageUrl("https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop")}
+                                alt="The Caterer Marketing & PR Summit"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                            />
                         </div>
                         <h3 className="font-serif text-xl mb-2">The Caterer Marketing & PR Summit</h3>
                         <p className="text-[10px] uppercase tracking-widest text-white/50">07 Oct 2026<br />N&amp;B Italian Hotel, London</p>
@@ -40,7 +48,13 @@ export default function EventsPreview() {
 
                     <div className="text-center group">
                         <div className="overflow-hidden mb-6 aspect-[4/5] relative">
-                            <img src="https://res.cloudinary.com/duweg8kpv/image/upload/v1772988986/360_F_692511356_6jleOpKpvIMrGRtXo7TZk70aD8ePbZvQ_q7ahz9.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Summit" />
+                            <Image
+                                src={getImageUrl("https://res.cloudinary.com/duweg8kpv/image/upload/v1772988986/360_F_692511356_6jleOpKpvIMrGRtXo7TZk70aD8ePbZvQ_q7ahz9.jpg")}
+                                alt="Envato LLC Marketing & PR Summit"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                            />
                         </div>
                         <h3 className="font-serif text-xl mb-2">Envato LLC Marketing & PR Summit</h3>
                         <p className="text-[10px] uppercase tracking-widest text-white/50">10 Nov 2026<br />N&amp;B Italian Hotel, Melbourne</p>
@@ -48,7 +62,13 @@ export default function EventsPreview() {
 
                     <div className="text-center group">
                         <div className="overflow-hidden mb-6 aspect-[4/5] relative">
-                            <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Summit" />
+                            <Image
+                                src={getImageUrl("https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800&auto=format&fit=crop")}
+                                alt="3rd Natro Hosting & Summit"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                            />
                         </div>
                         <h3 className="font-serif text-xl mb-2">3rd Natro Hosting & Summit</h3>
                         <p className="text-[10px] uppercase tracking-widest text-white/50">30 Aug 2026<br />N&amp;B Italian Hotel, Istanbul</p>

@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/api";
 
 export default function FoodBeverage() {
     return (
@@ -48,10 +50,12 @@ export default function FoodBeverage() {
                     </motion.div>
                 </div>
                 <div className="h-[400px] md:h-full min-h-[500px] w-full relative">
-                    <img
-                        src="https://res.cloudinary.com/duweg8kpv/image/upload/v1771930902/ricceee_cjmnwu.jpg"
+                    <Image
+                        src={getImageUrl("https://res.cloudinary.com/duweg8kpv/image/upload/v1771930902/ricceee_cjmnwu.jpg")}
                         alt="Fine Dining Experience"
-                        className="absolute inset-0 w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
             </div>

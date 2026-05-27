@@ -1,9 +1,47 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import ExtendedLuxuryText from "@/components/sections/ExtendedLuxuryText";
+import { apiClient } from "@/lib/api";
 
-const images = [
+interface GalleryImage {
+  src: string;
+  label: string;
+  span: string;
+}
+
+const FALLBACK_IMAGES: GalleryImage[] = [
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
   {
     src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
     label: "Exterior",
@@ -30,6 +68,26 @@ const images = [
     span: "col-span-2 row-span-1",
   },
   {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272416/N10_q1nxp0.jpg",
+    label: "Exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
     src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop",
     label: "Spa",
     span: "col-span-1 row-span-1",
@@ -39,24 +97,55 @@ const images = [
 export default function GalleryPage() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [imagesList, setImagesList] = useState<GalleryImage[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 100);
-    return () => clearTimeout(timer);
+    const fetchGalleryImages = async () => {
+      try {
+        const { data } = await apiClient.get("/api/gallery");
+        if (data && data.length > 0) {
+          const mapped = data.map((img: any, idx: number) => {
+            // Apply modular layout grid spans for a mosaic look
+            let span = "col-span-1 row-span-1";
+            if (idx % 6 === 0) {
+              span = "col-span-2 row-span-2";
+            } else if (idx % 6 === 3) {
+              span = "col-span-1 row-span-2";
+            } else if (idx % 6 === 4) {
+              span = "col-span-2 row-span-1";
+            }
+            return {
+              src: img.image_url,
+              label: img.category ? (img.category.charAt(0).toUpperCase() + img.category.slice(1)) : "Showcase",
+              span
+            };
+          });
+          setImagesList(mapped);
+        } else {
+          setImagesList(FALLBACK_IMAGES);
+        }
+      } catch (err) {
+        console.error("Failed to load gallery images:", err);
+        setImagesList(FALLBACK_IMAGES);
+      } finally {
+        setLoaded(true);
+      }
+    };
+    fetchGalleryImages();
   }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (lightbox === null) return;
       if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowRight") setLightbox((l) => ((l ?? 0) + 1) % images.length);
+      if (e.key === "ArrowRight") setLightbox((l) => ((l ?? 0) + 1) % imagesList.length);
       if (e.key === "ArrowLeft")
-        setLightbox((l) => ((l ?? 0) - 1 + images.length) % images.length);
+        setLightbox((l) => ((l ?? 0) - 1 + imagesList.length) % imagesList.length);
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [lightbox]);
+  }, [lightbox, imagesList]);
 
   return (
     <>
@@ -234,13 +323,9 @@ export default function GalleryPage() {
         }
 
         .mosaic-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
           transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                       filter 0.9s ease;
           filter: brightness(0.88) saturate(0.9);
-          display: block;
         }
 
         .mosaic-cell:hover .mosaic-img {
@@ -255,7 +340,7 @@ export default function GalleryPage() {
           background: linear-gradient(
             160deg,
             rgba(8,8,8,0) 40%,
-            rgba(8,8,8,0.7) 100%
+            rgba(8,8,8,0.7) 100-percent
           );
           opacity: 0;
           transition: opacity 0.5s ease;
@@ -516,7 +601,9 @@ export default function GalleryPage() {
 
         {/* ── MOSAIC ── */}
         <section className="mosaic-wrap">
-          <MosaicGrid images={images} onOpen={setLightbox} />
+          {imagesList.length > 0 && (
+            <MosaicGrid images={imagesList} onOpen={setLightbox} />
+          )}
         </section>
 
         {/* ── DIVIDER ── */}
@@ -530,7 +617,7 @@ export default function GalleryPage() {
       </div>
 
       {/* ── LIGHTBOX ── */}
-      {lightbox !== null && (
+      {lightbox !== null && imagesList[lightbox] && (
         <div
           className="lightbox-backdrop"
           onClick={() => setLightbox(null)}
@@ -552,7 +639,7 @@ export default function GalleryPage() {
             <div className="lb-nav lb-nav-left">
               <button
                 className="lb-btn"
-                onClick={() => setLightbox((l) => ((l ?? 0) - 1 + images.length) % images.length)}
+                onClick={() => setLightbox((l) => ((l ?? 0) - 1 + imagesList.length) % imagesList.length)}
                 aria-label="Previous"
               >
                 <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -563,22 +650,28 @@ export default function GalleryPage() {
             <div className="lb-nav lb-nav-right">
               <button
                 className="lb-btn"
-                onClick={() => setLightbox((l) => ((l ?? 0) + 1) % images.length)}
+                onClick={() => setLightbox((l) => ((l ?? 0) + 1) % imagesList.length)}
                 aria-label="Next"
               >
                 <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </button>
             </div>
 
-            <img
-              src={images[lightbox].src}
-              alt={images[lightbox].label}
-            />
+            <div className="relative max-w-full max-h-full">
+              <Image
+                src={imagesList[lightbox].src}
+                alt={imagesList[lightbox].label}
+                width={1200}
+                height={800}
+                className="object-contain"
+                priority
+              />
+            </div>
 
             <div className="lightbox-bar">
-              <span className="lightbox-meta">{images[lightbox].label}</span>
+              <span className="lightbox-meta">{imagesList[lightbox].label}</span>
               <span className="lightbox-count">
-                {String(lightbox + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+                {String(lightbox + 1).padStart(2, "0")} / {String(imagesList.length).padStart(2, "0")}
               </span>
             </div>
           </div>
@@ -593,7 +686,7 @@ function MosaicGrid({
   images,
   onOpen,
 }: {
-  images: { src: string; label: string }[];
+  images: GalleryImage[];
   onOpen: (i: number) => void;
 }) {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
@@ -619,7 +712,7 @@ function MosaicGrid({
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [images]);
 
   return (
     <div className="mosaic">
@@ -634,12 +727,16 @@ function MosaicGrid({
           onKeyDown={(e) => e.key === "Enter" && onOpen(i)}
           aria-label={`Open ${img.label} in lightbox`}
         >
-          <img
-            src={img.src}
-            alt={img.label}
-            className="mosaic-img"
-            loading={i === 0 ? "eager" : "lazy"}
-          />
+          <div className="relative w-full h-full min-h-[320px]">
+            <Image
+              src={img.src}
+              alt={img.label}
+              fill
+              className="mosaic-img object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              priority={i < 4}
+            />
+          </div>
           <div className="mosaic-overlay" />
 
           {/* index */}

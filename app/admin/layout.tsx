@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
+import AdminSidebarLayout from "@/components/layout/AdminLayout";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
@@ -41,5 +43,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         );
     }
 
-    return <>{children}</>;
+    if (pathname === "/admin/login") {
+        return <>{children}</>;
+    }
+
+    return <AdminSidebarLayout>{children}</AdminSidebarLayout>;
 }

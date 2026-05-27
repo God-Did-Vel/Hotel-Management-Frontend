@@ -16,9 +16,9 @@ const config: Config = {
       },
        fontFamily: {
         sans: ['"Lato"', 'sans-serif'],
-        serif: ['"Lato"', 'serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         mono: ['"Lato"', 'monospace'],
-        playfair: ['"Lato"', 'serif'],
+        playfair: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

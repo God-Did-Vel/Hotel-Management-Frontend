@@ -74,7 +74,7 @@ export default function About() {
                             />
 
                             <motion.img
-                                src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1600&auto=format&fit=crop"
+                                src="https://res.cloudinary.com/duweg8kpv/image/upload/t6_yaa3f6.jpg"
                                 alt="Luxury Hotel Lobby"
                                 className="w-full h-full object-cover relative z-10"
                                 style={{ y }}

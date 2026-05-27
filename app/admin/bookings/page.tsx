@@ -70,7 +70,7 @@ function BookingsContent() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-gray-300">
-                                        ${booking.total_amount?.toLocaleString() || 0}
+                                        ₦{booking.total_amount?.toLocaleString() || 0}
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className={`px-3 py-1 text-xs uppercase tracking-wider rounded-full ${booking.booking_status === 'confirmed' ? 'bg-green-500/20 text-green-500' :

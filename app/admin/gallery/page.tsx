@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { apiClient } from "@/lib/api";
+import { apiClient, getImageUrl } from "@/lib/api";
+import Image from "next/image";
 import { Loader2, Plus, Trash2, X } from "lucide-react";
 import { toast, Toaster } from "react-hot-toast";
 
 export default function GalleryManagement() {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     const [formData, setFormData] = useState({
         image_url: "",
@@ -37,10 +39,14 @@ export default function GalleryManagement() {
                 toast.error(error.response?.data?.message || "Failed to delete gallery image");
             }
         }
-    }
+    };
 
     const handleAddImage = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.image_url) {
+            toast.error("Please upload an image first.");
+            return;
+        }
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem("adminToken");
@@ -55,6 +61,34 @@ export default function GalleryManagement() {
             toast.error(error.response?.data?.message || "Failed to add image");
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const uploadFileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const formDataFile = new FormData();
+        formDataFile.append("image", file);
+        setUploadingImage(true);
+
+        try {
+            const token = localStorage.getItem("adminToken");
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await apiClient.post("/api/upload", formDataFile, config);
+            setFormData(prev => ({ ...prev, image_url: data }));
+            toast.success("Image uploaded successfully!");
+        } catch (error: any) {
+            console.error(error);
+            toast.error("Image upload failed");
+        } finally {
+            setUploadingImage(false);
         }
     };
 
@@ -84,14 +118,16 @@ export default function GalleryManagement() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {images?.map((img: any) => (
                         <div key={img._id} className="relative group rounded-lg overflow-hidden bg-[#141414] aspect-square border border-white/5">
-                            <img
-                                src={img.image_url}
+                            <Image
+                                src={getImageUrl(img.image_url)}
                                 alt={img.caption || img.category || "Gallery Image"}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                                sizes="(max-width: 768px) 50vw, 25vw"
                             />
 
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center">
-                                <p className="text-white text-sm font-medium mb-1 truncate w-full">{img.caption}</p>
+                                <p className="text-white text-sm font-medium mb-1 truncate w-full">{img.caption || "Showcase Image"}</p>
                                 <p className="text-accent text-xs uppercase tracking-widest mb-4">{img.category}</p>
 
                                 <button
@@ -128,13 +164,24 @@ export default function GalleryManagement() {
 
                         <form onSubmit={handleAddImage} className="space-y-6">
                             <div>
-                                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Image URL</label>
+                                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Upload Image File</label>
                                 <input
-                                    type="url" required
-                                    value={formData.image_url} onChange={e => setFormData({ ...formData, image_url: e.target.value })}
-                                    className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent"
-                                    placeholder="https://..."
+                                    type="file" required
+                                    onChange={uploadFileHandler}
+                                    className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-black hover:file:bg-white cursor-pointer"
                                 />
+                                {uploadingImage && <Loader2 className="w-4 h-4 text-accent animate-spin mt-2" />}
+                                {formData.image_url && (
+                                    <div className="mt-3 relative aspect-video rounded overflow-hidden border border-white/10 bg-black/50">
+                                        <Image
+                                            src={getImageUrl(formData.image_url)}
+                                            alt="Preview"
+                                            fill
+                                            className="object-cover"
+                                            sizes="400px"
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div>
@@ -157,15 +204,15 @@ export default function GalleryManagement() {
                                     type="text"
                                     value={formData.caption} onChange={e => setFormData({ ...formData, caption: e.target.value })}
                                     className="w-full bg-[#141414] border border-white/10 text-white p-3 focus:outline-none focus:border-accent"
-                                    placeholder="Premium Ocean View"
+                                    placeholder="e.g. Premium Ocean View"
                                 />
                             </div>
 
                             <button
-                                type="submit" disabled={isSubmitting}
+                                type="submit" disabled={isSubmitting || uploadingImage}
                                 className="w-full bg-accent text-black font-semibold py-4 uppercase tracking-wider hover:bg-white transition-colors flex justify-center mt-4 disabled:opacity-50"
                             >
-                                {isSubmitting ? <Loader2 className="animate-spin w-5 h-5" /> : "Upload"}
+                                {isSubmitting ? <Loader2 className="animate-spin w-5 h-5" /> : "Add to Gallery"}
                             </button>
                         </form>
                     </div>

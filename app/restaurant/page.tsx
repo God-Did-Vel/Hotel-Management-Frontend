@@ -1,61 +1,62 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { Coffee, UtensilsCrossed, Wine } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/api";
 
 const meals = [
   {
     name: "Wagyu Beef Filet",
     description:
       "Served with truffle mash, roasted asparagus, and a port wine reduction.",
-    price: "$85",
+    price: "₦55,000",
     category: "Dinner",
   },
   {
     name: "Lobster Ravioli",
     description:
       "Handmade pasta stuffed with Maine lobster in a saffron cream sauce.",
-    price: "$45",
+    price: "₦30,000",
     category: "Dinner",
   },
   {
     name: "Tiramisu della Casa",
     description:
       "Classic Italian dessert made with espresso, mascarpone, and cocoa.",
-    price: "$18",
+    price: "₦12,500",
     category: "Dessert",
   },
   {
     name: "Mediterranean Sea Bass",
     description:
       "Pan-seared, served with lemon butter, capers, and seasonal greens.",
-    price: "$55",
+    price: "₦36,000",
     category: "Dinner",
   },
   {
     name: "Artisan Eggs Benedict",
     description: "Poached eggs, prosciutto, hollandaise on toasted ciabatta.",
-    price: "$28",
+    price: "₦18,500",
     category: "Breakfast",
   },
   {
     name: "Avocado & Crab Tartare",
     description: "Fresh crab meat, avocado puree, and citrus dressing.",
-    price: "$32",
+    price: "₦21,000",
     category: "Appetizer",
   },
   {
     name: "Tuscan Ribeye",
     description: "Dry-aged 16oz bone-in ribeye with rosemary potatoes.",
-    price: "$95",
+    price: "₦62,000",
     category: "Dinner",
   },
   {
     name: "Saffron Risotto",
     description:
       "Creamy Arborio rice infused with Spanish saffron and parmesan.",
-    price: "$38",
+    price: "₦25,000",
     category: "Dinner",
   },
 ];
@@ -101,10 +102,12 @@ export default function RestaurantPage() {
             transition={{ duration: 0.8 }}
             className="relative h-[600px] rounded-lg overflow-hidden group"
           >
-            <img
-              src="https://res.cloudinary.com/duweg8kpv/image/upload/v1773930508/Restaurant_thhdgg.jpg"
+            <Image
+              src={getImageUrl("https://res.cloudinary.com/duweg8kpv/image/upload/v1773930508/Restaurant_thhdgg.jpg")}
               alt="Fine Dining"
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              fill
+              className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 600px"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
           </motion.div>

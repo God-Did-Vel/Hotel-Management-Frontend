@@ -5,7 +5,7 @@ export default function MapSection() {
     return (
         <section className="h-[500px] w-full bg-[#121212] flex items-center justify-center relative border-t border-white/5">
             <div className="absolute top-10 text-center z-10 bg-black/80 backdrop-blur-md px-8 py-3 rounded-full border border-white/10">
-                <span className="text-white uppercase tracking-widest text-xs font-bold">Find Us in Benin & Lagos</span>
+                <span className="text-white uppercase tracking-widest text-xs font-bold">Find Us in Benin & Ore</span>
             </div>
 
         

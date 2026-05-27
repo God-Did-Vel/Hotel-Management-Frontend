@@ -43,11 +43,11 @@ export default function Navbar() {
       {/* ── Thin announcement bar ── */}
       <div className="nb-announce">
         <span>✦</span>
-        <span>Complimentary Spa Access on Stays of 3 Nights or More</span>
+        <span>Luxury Hospitality Privileges Included with Extended Stays.</span>
         <span>✦</span>
         <span className="nb-phone">
           <Phone size={11} style={{ display: "inline", marginRight: 5 }} />
-          +234 91 1234 5678
+         +234 912 732 0358
         </span>
       </div>
 
