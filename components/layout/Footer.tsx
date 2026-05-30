@@ -56,9 +56,9 @@ export default function Footer() {
                 <div>
                     <h4 className="text-lg uppercase tracking-wider mb-6 font-serif">Contact</h4>
                     <ul className="space-y-3 font-light text-gray-400">
-                        <li>123 Luxury Ave, NY 10012</li>
-                        <li>+1 (234) 567 8900</li>
-                        <li>info@nb-italian-hotel.com</li>
+                        <li>No..23 omoruyi street,off auchi express road idokpa benin city.</li>
+                        <li>+234 912 7320358 OR +234 703382921</li>
+                        <li>support@nbitalianhotel.com</li>
                     </ul>
                 </div>
 

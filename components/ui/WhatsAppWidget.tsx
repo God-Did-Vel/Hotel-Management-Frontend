@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const WHATSAPP_NUMBER = "09031269748";
+const WHATSAPP_NUMBER = "07039168661";
 const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER.replace(/^0/, "234")}`;
 
 export default function WhatsAppWidget() {
@@ -251,7 +251,7 @@ export default function WhatsAppWidget() {
           >
             <span className="lbl-dot" />
             <span className="lbl-text">
-              <strong>Chat</strong>&nbsp;with us on WhatsApp
+              <strong>Hello</strong>&nbsp;Let's Help?
             </span>
           </div>
         )}

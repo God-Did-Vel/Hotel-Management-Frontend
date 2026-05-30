@@ -14,7 +14,8 @@ type Room = {
     slug: string;
     price_per_night: number;
     description: string;
-    image: string;
+    image?: string;
+    images?: string[];
     bed_type: string;
     amenities: string[];
     badge?: string;
@@ -194,7 +195,7 @@ export default function RoomsPage() {
                                         
                                         {/* Image */}
                                         <Image
-                                            src={getImageUrl(room.image)}
+                                            src={getImageUrl(room.images?.[0] || room.image)}
                                             alt={room.name}
                                             fill
                                             className="object-cover brightness-[0.88] contrast-[1.02] group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1500ms] ease-out"

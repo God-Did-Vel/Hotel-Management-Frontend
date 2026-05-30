@@ -175,6 +175,7 @@ export default function RoomsManagement() {
             const { data } = await apiClient.post("/api/upload", formDataFile, {
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data",
                 },
             });
 

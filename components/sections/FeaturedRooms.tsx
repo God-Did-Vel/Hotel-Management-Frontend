@@ -13,7 +13,8 @@ interface Room {
     slug: string;
     room_size: string;
     price_per_night: number;
-    image: string;
+    image?: string;
+    images?: string[];
     amenities: string[];
     featured: boolean;
 }
@@ -38,6 +39,9 @@ export default function FeaturedRooms() {
 
         fetchRooms();
     }, []);
+
+    // Default fallback image from Cloudinary
+    const defaultImage = "https://res.cloudinary.com/duweg8kpv/image/upload/v1774272414/N8_e2gfi5.jpg";
 
     return (
         <section className="py-32 bg-[#050505]">
@@ -80,7 +84,7 @@ export default function FeaturedRooms() {
                                 {/* Image Container */}
                                 <div className="overflow-hidden h-72 relative">
                                     <Image
-                                        src={getImageUrl(room.image)}
+                                        src={getImageUrl(room.images?.[0] || room.image || defaultImage)}
                                         alt={room.name}
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"

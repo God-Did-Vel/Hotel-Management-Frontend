@@ -23,6 +23,16 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '/**',
       },
+       {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '5000',
+      },
+       {
+        protocol: 'https',
+        hostname: 'hotel-management-backend-production-fca9.up.railway.app',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
@@ -32,6 +42,11 @@ const nextConfig = {
         protocol: apiProtocol,
         hostname: apiHost,
         pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '5000',
       },
       {
         protocol: 'http',

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { apiClient } from "@/lib/api";
+import { apiClient, getImageUrl } from "@/lib/api";
 import Image from "next/image";
 
 const GALLERY_IMAGES = [
@@ -50,7 +50,7 @@ export default function GalleryPreview() {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
                         <Image
-                            src={img}
+                            src={getImageUrl(img)}
                             alt={`Showcase Gallery Preview ${index + 1}`}
                             fill
                             loading="lazy"
